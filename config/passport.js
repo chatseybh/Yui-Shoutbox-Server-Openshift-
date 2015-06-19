@@ -11,24 +11,6 @@ var url = require('url');
 // expose this function to our app using module.exports
 module.exports = function(passport) {
 	// =========================================================================
-	// passport session setup ==================================================
-	// =========================================================================
-	// required for persistent login sessions
-	// passport needs ability to serialize and unserialize users out of session
-
-	// used to serialize the user for the session
-	passport.serializeUser(function(user, done) {
-		done(null, user.id);
-	});
-
-	// used to deserialize the user
-	passport.deserializeUser(function(id, done) {
-		User.findById(id, function(err, user) {
-			done(err, user);
-		});
-	});
-
-	// =========================================================================
 	// LOCAL SIGNUP ============================================================
 	// =========================================================================
 	// we are using named strategies since we have one for login and one for signup
@@ -52,7 +34,6 @@ module.exports = function(passport) {
 				// set the user's local credentials
 				newUser.local.user = user;
 				newUser.local.password = newUser.generateHash(password); // use the generateHash function in our user model
-				newUser.local.spku = req.body.secret;
 				newUser.local.origin = [origin];
 				newUser.local.check = '1';
 
