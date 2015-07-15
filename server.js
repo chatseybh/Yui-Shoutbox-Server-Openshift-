@@ -15,7 +15,7 @@ var User = require('./lib/user');
 var db = require('./lib/yuishout-db');
 var whitelist = [];
 var dbcredential = process.env.OPENSHIFT_MONGODB_DB_URL;
-var dbname = 'yuishout';
+var dbname = process.env.OPENSHIFT_APP_NAME;
 var url = dbcredential + dbname;
 
 // initialize db ===============================================================
